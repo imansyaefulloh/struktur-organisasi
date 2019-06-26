@@ -4,6 +4,9 @@
 
 # git clone git@github.com:imansyaefulloh/struktur-organisasi.git
 
+// install dependency
+# composer install
+
 2. create new database "struktur_organisasi"
 
 3. copy example .env.example
