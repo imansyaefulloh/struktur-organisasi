@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Organization Structure CRUD
                 </div>
 
                 <div class="links">
