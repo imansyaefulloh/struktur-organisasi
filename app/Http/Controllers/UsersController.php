@@ -2,72 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Position;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    protected $limit = 5;
+
     public function index()
     {
-        $users = User::orderBy('name')->paginate($this->limit);
-        $usersCount = User::count();
+        $users = User::with('position')->orderBy('id')->paginate($this->limit);
 
-        return view('users.index', compact('users', 'usersCount'));
+        return view('users.index', compact('users'));
     }
 
-    // public function create()
-    // {
-    //     $user = new user();
-    //     return view('backend.users.create', compact('user'));
-    // }
+    public function create()
+    {
+        $user = new User;
+        return view('users.create', compact('user'));
+    }
 
-    // public function store(UserStoreRequest $request)
-    // {
-    //     $data = $request->all();
-    //     $data['password'] = bcrypt($data['password']);
-    //     $user = User::create($data);
-    //     $user->attachRole($request->role);
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
 
-    //     return redirect('/backend/users')->with('message', 'New user was created successfully!');
-    // }
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'position_id' => $request->position_id
+        ]);
 
-    // public function edit($id)
-    // {
-    //     $user = User::findOrFail($id);
+        return redirect('users')->with('message', 'New user created successfully!');
+    }
 
-    //     return view('backend.users.edit', compact('user'));
-    // }
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
 
-    // public function update(UserUpdateRequest $request, $id)
-    // {
-    //     $data = $request->all();
-    //     $data['password'] = bcrypt($data['password']);
-        
-    //     $user = User::findOrFail($id);
-    //     $user->update($data);
-        
-    //     $user->detachRoles();
-    //     $user->attachRole($request->role);
+        return view('users.edit', compact('user'));
+    }
 
-    //     return redirect('/backend/users')->with('message', 'User was updated successfully!');
-    // }
+    public function update(Request $request, $id)
+    {
+        User::findOrFail($id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'position_id' => $request->position_id
+        ]);
 
-    // public function destroy(UserDestroyRequest $request, $id)
-    // {
-    //     $user = User::findOrFail($id);
+        return redirect('users')->with('message', 'User was updated successfully!');
+    }
 
-    //     $deleteOption = $request->delete_option;
-    //     $selectedUser = $request->selected_user;
+    public function destroy(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
 
-    //     if ($deleteOption == 'delete') {
-    //         // TODO
-    //         // DELETE post image before deleting the posts
-    //         $user->posts()->withTrashed()->forceDelete();
-    //     } elseif ($deleteOption == 'attribute') {
-    //         $user->posts()->update(['author_id' => $selectedUser]);
-    //     }
+        // delete semua posisi yang memiliki parent_id yang dimiliki oleh user yang mau di delete
+        Position::where('parent_id', $user->position_id)->delete();
 
-    //     $user->delete();
+        $user->delete();
 
-    //     return redirect('/backend/users')->with('message', 'User was deleted successfully!');
-    // }
+        return redirect('users')->with('message', 'User  was deleted successfully!');
+    }
 }

@@ -13,14 +13,13 @@ class PositionsController extends Controller
     public function index()
     {
         $positions = Position::with('boss')->orderBy('id')->paginate($this->limit);
-        $positionsCount = Position::count();
 
-        return view('positions.index', compact('positions', 'positionsCount'));
+        return view('positions.index', compact('positions'));
     }
 
     public function create()
     {
-        $position = new Position();
+        $position = new Position;
         return view('positions.create', compact('position'));
     }
 
