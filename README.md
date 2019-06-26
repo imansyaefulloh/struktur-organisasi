@@ -2,7 +2,9 @@
 
 1. Clone this repository git@github.com:imansyaefulloh/struktur-organisasi.git
 
+```bash
 $ git clone git@github.com:imansyaefulloh/struktur-organisasi.git
+```
 
 install dependency
 
