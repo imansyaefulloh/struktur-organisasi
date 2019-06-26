@@ -2,19 +2,27 @@
 
 1. Clone this repository git@github.com:imansyaefulloh/struktur-organisasi.git
 
-# git clone git@github.com:imansyaefulloh/struktur-organisasi.git
+$ git clone git@github.com:imansyaefulloh/struktur-organisasi.git
 
-// install dependency
-# composer install
+install dependency
+
+```bash
+$ composer install
+```
 
 2. create new database "struktur_organisasi"
 
 3. copy example .env.example
 
-# cp .env.example .env
+```bash
+$ cp .env.example .env
+```
 
-// set application key
-# php artisan key:generate
+set application key
+
+```bash
+$ php artisan key:generate
+```
 
 4. edit env variable
 
@@ -26,16 +34,25 @@ DB_PASSWORD=secret
 
 5. run this command
 
-// run database migration
-# php artisan migrate
+run database migration
 
-// populate dummy data
-# php artisan db:seed 
+```bash
+$ php artisan migrate
+```
 
-// run this application using laravel builtin server
-# php artisan serve
+populate dummy data
 
+```bash
+$ php artisan db:seed 
+```
 
-// login using
+run this application using laravel builtin server
+
+```bash
+$ php artisan serve
+```
+
+live demo => http://org.imansyaefulloh.com/
+
 username => iman@gmail.com
 password => secret
