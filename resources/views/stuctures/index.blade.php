@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        @include('layouts.partials.sidebar')
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">Company Stucture</div>
                 <div class="card-body">

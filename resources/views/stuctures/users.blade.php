@@ -1,11 +1,13 @@
 @if (count($users) == 1)
-    <span>({{ $users[0]->name }})</span>
+    ({{ $users[0]->name }})
 @else
-    @for($i = 0; $i < count($users); $i++)
-        @if ($i == (count($users) - 1))
-            {{ $users[$i]->name }})</span> 
-        @else
-           <span>({{ $users[$i]->name . ", "}}
-        @endif
+    <ul>
+    @for($i = 0; $i < count($users); $i++)    
+        {{-- @if ($i == (count($users) - 1))
+            {{ $users[$i]->name }}</li>
+        @else --}}
+       <li>{{ $users[$i]->name}}</li>
+        {{-- @endif --}}
     @endfor
+    </ul>
 @endif

@@ -2,5 +2,6 @@
     <ul class="list-group">
         <li class="list-group-item"><a href="/positions">Manage Positions</a></li>
         <li class="list-group-item"><a href="/users">Manage Users</a></li>
+        <li class="list-group-item"><a href="/stucture">Company Structure</a></li>
     </ul>
 </div>
