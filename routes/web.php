@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/stucture', 'StructureController@index');
     Route::resource('positions', 'PositionsController');
     Route::resource('users', 'UsersController');
 });

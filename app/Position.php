@@ -22,6 +22,6 @@ class Position extends Model
 
     public function subordinates()
     {
-        return $this->hasMany(Position::class, 'parent_id')->with('subordinates');
+        return $this->hasMany(Position::class, 'parent_id')->with(['subordinates', 'users']);
     }
 }
