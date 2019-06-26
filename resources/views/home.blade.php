@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        @include('layouts.sidebar')
+        @include('layouts.partials.sidebar')
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
